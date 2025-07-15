@@ -518,6 +518,35 @@ class MeditationApp {
             trackNameElement.style.color = 'rgba(255, 255, 255, 0.9)';
         }, 3000);
     }
+
+    // Initialize visitor counter
+    initializeVisitorCounter() {
+        const today = new Date().toDateString();
+        const visitorData = JSON.parse(localStorage.getItem('visitorData')) || {
+            totalVisitors: 0,
+            dailyVisitors: {},
+            lastVisit: null
+        };
+
+        // Check if this is a new visit today
+        if (!visitorData.dailyVisitors[today]) {
+            visitorData.dailyVisitors[today] = 0;
+        }
+
+        // Increment counters for new visitors
+        if (visitorData.lastVisit !== today) {
+            visitorData.totalVisitors++;
+            visitorData.dailyVisitors[today]++;
+            visitorData.lastVisit = today;
+            
+            localStorage.setItem('visitorData', JSON.stringify(visitorData));
+        }
+
+        // Update display
+        document.getElementById('visitorCount').textContent = visitorData.totalVisitors;
+        document.getElementById('todayCount').textContent = visitorData.dailyVisitors[today] || 0;
+        document.getElementById('totalCount').textContent = visitorData.totalVisitors;
+    }
 }
 
 // Initialize app when DOM is loaded

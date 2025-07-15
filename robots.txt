@@ -1,0 +1,30 @@
+User-agent: *
+Allow: /
+Disallow: /audio/
+Disallow: /test-audio.html
+Disallow: /check_ads_status.html
+Disallow: /add_real_ads_guide.html
+Disallow: /*.js$
+Disallow: /*.css$
+
+# Sitemap
+Sitemap: https://dheerengupta.github.io/TestRepo/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
+
+# Allow important search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
