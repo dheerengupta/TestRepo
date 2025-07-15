@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdSense Troubleshooting</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .check-item { background: #f0f0f0; padding: 15px; margin: 10px 0; border-left: 4px solid #007cba; }
+        .status-good { border-left-color: #28a745; background: #d4edda; }
+        .status-warning { border-left-color: #ffc107; background: #fff3cd; }
+        .status-error { border-left-color: #dc3545; background: #f8d7da; }
+        .code-block { background: #f5f5f5; padding: 10px; border-radius: 4px; font-family: monospace; margin: 10px 0; }
+        .button { background: #007cba; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>🔍 AdSense Troubleshooting Guide</h1>
+    
+    <h2>📋 Check These Items:</h2>
+    
+    <div class="check-item status-error">
+        <h3>❌ 1. Placeholder Slot IDs</h3>
+        <p><strong>Problem:</strong> Your current slot IDs are fake placeholders</p>
+        <div class="code-block">
+data-ad-slot="1234567890"  ← FAKE
+data-ad-slot="1234567891"  ← FAKE  
+data-ad-slot="1234567892"  ← FAKE
+        </div>
+        <p><strong>Solution:</strong> Replace with real slot IDs from AdSense dashboard</p>
+    </div>
+    
+    <div class="check-item status-warning">
+        <h3>⚠️ 2. AdSense Account Status</h3>
+        <p><strong>Check:</strong> Is your AdSense account approved?</p>
+        <p><strong>Steps:</strong></p>
+        <ol>
+            <li>Go to <a href="https://www.google.com/adsense/" target="_blank">AdSense Dashboard</a></li>
+            <li>Check if your account status is "Approved"</li>
+            <li>Verify your website is added and approved</li>
+        </ol>
+    </div>
+    
+    <div class="check-item status-warning">
+        <h3>⚠️ 3. Ad Units Created</h3>
+        <p><strong>Check:</strong> Have you created ad units in AdSense?</p>
+        <p><strong>Steps:</strong></p>
+        <ol>
+            <li>Go to AdSense → Ads → Ad units</li>
+            <li>Create new ad unit</li>
+            <li>Copy the real slot ID</li>
+            <li>Replace placeholder IDs in your code</li>
+        </ol>
+    </div>
+    
+    <div class="check-item status-good">
+        <h3>✅ 4. AdSense Code Installed</h3>
+        <p><strong>Status:</strong> Your AdSense code is properly installed</p>
+        <div class="code-block">
+&lt;script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9820648988558344"&gt;
+        </div>
+    </div>
+    
+    <div class="check-item status-good">
+        <h3>✅ 5. Website Structure</h3>
+        <p><strong>Status:</strong> Your website has proper AdSense integration</p>
+        <ul>
+            <li>3 ad units are AdSense-ready</li>
+            <li>Responsive design implemented</li>
+            <li>Mobile-friendly layout</li>
+        </ul>
+    </div>
+    
+    <h2>🚀 Quick Fix Steps:</h2>
+    
+    <div class="check-item">
+        <h3>Step 1: Login to AdSense</h3>
+        <p>Go to <a href="https://www.google.com/adsense/" target="_blank">AdSense Dashboard</a></p>
+        <p>Check your account status and website approval</p>
+    </div>
+    
+    <div class="check-item">
+        <h3>Step 2: Create Ad Units</h3>
+        <p>Navigate to: Ads → Ad units → Create new ad unit</p>
+        <p>Create 3 ad units for your meditation website</p>
+    </div>
+    
+    <div class="check-item">
+        <h3>Step 3: Replace Slot IDs</h3>
+        <p>Copy the real slot IDs from AdSense and replace the fake ones in your code</p>
+        <div class="code-block">
+# Find this in your HTML:
+data-ad-slot="1234567890"
+
+# Replace with real slot ID:
+data-ad-slot="8765432109"
+        </div>
+    </div>
+    
+    <div class="check-item">
+        <h3>Step 4: Test and Wait</h3>
+        <p>After replacing slot IDs:</p>
+        <ul>
+            <li>Upload changes to your website</li>
+            <li>Wait 10-60 minutes for ads to appear</li>
+            <li>Test in different browsers</li>
+            <li>Check on mobile devices</li>
+        </ul>
+    </div>
+    
+    <h2>📊 Expected Timeline:</h2>
+    <ul>
+        <li><strong>AdSense Approval:</strong> 1-14 days (if not approved yet)</li>
+        <li><strong>Create Ad Units:</strong> 5-10 minutes</li>
+        <li><strong>Replace Slot IDs:</strong> 10-15 minutes</li>
+        <li><strong>Ads Start Showing:</strong> 10-60 minutes after changes</li>
+    </ul>
+    
+    <h2>🔧 Common Issues:</h2>
+    <ul>
+        <li><strong>AdBlockers:</strong> Turn off AdBlock to see ads</li>
+        <li><strong>New Website:</strong> Ads may take longer to show on new sites</li>
+        <li><strong>Low Traffic:</strong> AdSense prioritizes sites with good traffic</li>
+        <li><strong>Content Issues:</strong> Ensure content follows AdSense policies</li>
+    </ul>
+    
+    <div class="check-item status-good">
+        <h3>💡 Pro Tip:</h3>
+        <p>The main issue is likely the fake slot IDs. Once you replace them with real ones from your AdSense dashboard, ads should start appearing within an hour!</p>
+    </div>
+    
+</body>
+</html>
