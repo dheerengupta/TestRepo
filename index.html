@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Meditation - Find Your Inner Peace</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="logo">
+                <h1>🧘‍♀️ Daily Meditation</h1>
+                <p>Your journey to inner peace starts here</p>
+            </div>
+            
+            <!-- Streak Counter -->
+            <div class="streak-container">
+                <div class="streak-display">
+                    <div class="streak-number" id="streakNumber">0</div>
+                    <div class="streak-label">Day Streak</div>
+                </div>
+                <div class="streak-flame" id="streakFlame">🔥</div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Daily Meditation Card -->
+            <div class="meditation-card">
+                <div class="date-display" id="dateDisplay"></div>
+                <div class="meditation-content">
+                    <h2 class="meditation-title" id="meditationTitle">Loading...</h2>
+                    <div class="meditation-description" id="meditationDescription">
+                        Preparing your daily meditation...
+                    </div>
+                    <div class="meditation-duration" id="meditationDuration">5 min</div>
+                </div>
+            </div>
+
+            <!-- Meditation Controls -->
+            <div class="controls">
+                <button class="btn btn-primary" id="startBtn">Start Meditation</button>
+                <button class="btn btn-secondary" id="completeBtn" style="display: none;">Complete Session</button>
+            </div>
+
+            <!-- Timer Display -->
+            <div class="timer-display" id="timerDisplay" style="display: none;">
+                <div class="timer-circle">
+                    <div class="timer-number" id="timerNumber">5:00</div>
+                </div>
+                <div class="timer-progress">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+            </div>
+
+            <!-- Progress Section -->
+            <div class="progress-section">
+                <h3>Your Progress</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalSessions">0</div>
+                        <div class="stat-label">Total Sessions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalMinutes">0</div>
+                        <div class="stat-label">Minutes Meditated</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="longestStreak">0</div>
+                        <div class="stat-label">Longest Streak</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekly Calendar -->
+            <div class="calendar-section">
+                <h3>This Week</h3>
+                <div class="calendar-grid" id="calendarGrid">
+                    <!-- Calendar will be populated by JavaScript -->
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Daily Meditation. Peace begins with a single breath.</p>
+        </footer>
+    </div>
+
+    <script src="meditation-data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
