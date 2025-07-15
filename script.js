@@ -27,6 +27,7 @@ class MeditationApp {
         this.createCalendar();
         this.setupEventListeners();
         this.initializeAudio();
+        this.initializeVisitorCounter();
     }
 
     // Load and display today's meditation

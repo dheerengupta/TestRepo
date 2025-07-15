@@ -527,14 +527,95 @@ body {
     background: rgba(255, 255, 255, 0.2);
 }
 
+/* Visitor Counter */
+.visitor-counter {
+    margin: 30px 0 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.counter-container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 15px 25px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.counter-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.counter-icon {
+    font-size: 1.2rem;
+    animation: pulse 2s infinite;
+}
+
+.counter-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.counter-number {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    padding: 4px 12px;
+    border-radius: 12px;
+    min-width: 40px;
+    text-align: center;
+}
+
+.counter-stats {
+    display: flex;
+    gap: 15px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+}
+
+.stat-value {
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
 /* Footer */
 .footer {
     text-align: center;
     padding: 20px 0;
-    margin-top: 40px;
+    margin-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.6);
     font-size: 0.9rem;
+}
+
+.footer p {
+    margin: 5px 0;
+}
+
+.footer p:first-child {
+    font-weight: 500;
+}
+
+.footer p:last-child {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 /* Responsive Design */

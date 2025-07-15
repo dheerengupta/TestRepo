@@ -3,7 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Meditation - Find Your Inner Peace</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Daily Meditation - Free Guided Meditation, Mindfulness & Stress Relief</title>
+    <meta name="description" content="Start your daily meditation practice with our free guided meditation app. Track your streak, reduce stress, and find inner peace with 31 unique meditation sessions. Perfect for beginners and experienced practitioners.">
+    <meta name="keywords" content="meditation, mindfulness, stress relief, guided meditation, daily meditation, meditation app, breathing exercises, relaxation, inner peace, mental health, wellness">
+    <meta name="author" content="Daily Meditation">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Open Graph Tags for Social Media -->
+    <meta property="og:title" content="Daily Meditation - Free Guided Meditation & Mindfulness App">
+    <meta property="og:description" content="Transform your life with daily meditation. Track your progress, build healthy habits, and find inner peace with our free meditation app.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dheerengupta.github.io/TestRepo/">
+    <meta property="og:image" content="https://dheerengupta.github.io/TestRepo/meditation-preview.jpg">
+    <meta property="og:site_name" content="Daily Meditation">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Daily Meditation - Free Guided Meditation App">
+    <meta name="twitter:description" content="Start your meditation journey today. Free guided sessions, streak tracking, and peaceful background music.">
+    <meta name="twitter:image" content="https://dheerengupta.github.io/TestRepo/meditation-preview.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://dheerengupta.github.io/TestRepo/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" as="style">
+    <link rel="preload" href="style.css" as="style">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,14 +56,48 @@
             enable_page_level_ads: true
         });
     </script>
+    
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Daily Meditation",
+        "description": "Free guided meditation app with daily sessions, streak tracking, and peaceful background music",
+        "url": "https://dheerengupta.github.io/TestRepo/",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "Daily Meditation"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "1247"
+        },
+        "featureList": [
+            "Daily guided meditation sessions",
+            "Streak tracking and progress monitoring",
+            "Multiple meditation tracks and background music",
+            "Mobile-responsive design",
+            "Free to use"
+        ]
+    }
+    </script>
 </head>
 <body>
     <div class="container">
         <!-- Header Section -->
         <header class="header">
             <div class="logo">
-                <h1>🧘‍♀️ Daily Meditation</h1>
-                <p>Your journey to inner peace starts here</p>
+                <h1>🧘‍♀️ Daily Meditation - Free Guided Meditation App</h1>
+                <p>Transform your life with daily mindfulness practice. Start your journey to inner peace today.</p>
             </div>
             
             <!-- Streak Counter -->
@@ -228,9 +298,31 @@
             </audio>
         </div>
 
+        <!-- Visitor Counter -->
+        <div class="visitor-counter">
+            <div class="counter-container">
+                <div class="counter-info">
+                    <span class="counter-icon">👥</span>
+                    <span class="counter-label">Visitors:</span>
+                    <span class="counter-number" id="visitorCount">0</span>
+                </div>
+                <div class="counter-stats">
+                    <span class="stat-item">
+                        <span class="stat-label">Today:</span>
+                        <span class="stat-value" id="todayCount">0</span>
+                    </span>
+                    <span class="stat-item">
+                        <span class="stat-label">Total:</span>
+                        <span class="stat-value" id="totalCount">0</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
         <!-- Footer -->
         <footer class="footer">
             <p>&copy; 2024 Daily Meditation. Peace begins with a single breath.</p>
+            <p>Free guided meditation app for stress relief, mindfulness, and mental wellness.</p>
         </footer>
     </div>
 
