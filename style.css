@@ -92,6 +92,95 @@ body {
     gap: 30px;
 }
 
+/* Content Wrapper for Layout */
+.content-wrapper {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.left-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.sidebar {
+    width: 300px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Ad Spaces */
+.ad-space {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.ad-space:hover {
+    opacity: 1;
+}
+
+.ad-placeholder {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.ad-content {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Banner Ad (728x90) */
+.ad-banner .ad-placeholder {
+    width: 728px;
+    height: 90px;
+    max-width: 100%;
+}
+
+.ad-banner.ad-bottom {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+/* Rectangle Ad (300x250) */
+.ad-rectangle .ad-placeholder {
+    width: 300px;
+    height: 250px;
+}
+
+.ad-rectangle.ad-sidebar {
+    margin-top: 20px;
+}
+
+/* Skyscraper Ad (160x600) */
+.ad-skyscraper .ad-placeholder {
+    width: 160px;
+    height: 600px;
+}
+
+/* Mobile Banner Ad (320x50) */
+.ad-mobile-banner .ad-placeholder {
+    width: 320px;
+    height: 50px;
+    max-width: 100%;
+}
+
 /* Meditation Card */
 .meditation-card {
     background: rgba(255, 255, 255, 0.95);
@@ -350,6 +439,21 @@ body {
         font-size: 2rem;
     }
     
+    /* Mobile Layout - Stack Content */
+    .content-wrapper {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .sidebar {
+        width: 100%;
+        order: 2;
+    }
+    
+    .left-content {
+        order: 1;
+    }
+    
     .meditation-card {
         padding: 30px 20px;
     }
@@ -380,6 +484,25 @@ body {
     .stats-grid {
         grid-template-columns: 1fr;
     }
+    
+    /* Mobile Ad Adjustments */
+    .ad-banner .ad-placeholder {
+        width: 320px;
+        height: 50px;
+    }
+    
+    .ad-rectangle .ad-placeholder {
+        width: 300px;
+        height: 250px;
+    }
+    
+    .ad-skyscraper {
+        display: none; /* Hide skyscraper ads on mobile */
+    }
+    
+    .ad-space {
+        margin: 15px 0;
+    }
 }
 
 @media (max-width: 480px) {
@@ -397,5 +520,22 @@ body {
     
     .progress-section, .calendar-section {
         padding: 20px;
+    }
+    
+    /* Very Small Screen Ad Adjustments */
+    .ad-banner .ad-placeholder {
+        width: 100%;
+        max-width: 320px;
+        height: 50px;
+    }
+    
+    .ad-rectangle .ad-placeholder {
+        width: 100%;
+        max-width: 300px;
+        height: 250px;
+    }
+    
+    .ad-space {
+        margin: 10px 0;
     }
 }
