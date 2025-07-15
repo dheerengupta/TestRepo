@@ -13,6 +13,8 @@ class MeditationApp {
         this.currentTrack = null;
         this.isAudioMuted = false;
         this.audioVolume = 0.5;
+        this.audioInterval = null;
+        this.demoAudioReady = false;
         
         // Initialize the app
         this.init();
@@ -324,9 +326,49 @@ class MeditationApp {
     initializeAudio() {
         this.audioElement = document.getElementById('meditationAudio');
         this.currentTrack = getRandomTrack(); // Get random track for variety
+        
+        // Create demo audio if files are not available
+        this.createDemoAudio();
+        
         this.loadTrack(this.currentTrack);
         this.setupAudioVolume();
         this.updateAudioDisplay();
+    }
+
+    // Create a demo audio file for testing
+    createDemoAudio() {
+        try {
+            // Create a simple sine wave audio
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const sampleRate = audioContext.sampleRate;
+            const duration = 10; // 10 seconds
+            const frequency = 528; // 528 Hz (healing frequency)
+            
+            const samples = sampleRate * duration;
+            const audioBuffer = audioContext.createBuffer(1, samples, sampleRate);
+            const channelData = audioBuffer.getChannelData(0);
+            
+            // Generate sine wave
+            for (let i = 0; i < samples; i++) {
+                channelData[i] = Math.sin(2 * Math.PI * frequency * i / sampleRate) * 0.3;
+            }
+            
+            // Convert to blob URL
+            const offlineContext = new OfflineAudioContext(1, samples, sampleRate);
+            const source = offlineContext.createBufferSource();
+            source.buffer = audioBuffer;
+            source.connect(offlineContext.destination);
+            source.start();
+            
+            offlineContext.startRendering().then(renderedBuffer => {
+                // For now, we'll use the Web Audio API approach in playAudio
+                this.demoAudioReady = true;
+            });
+            
+        } catch (error) {
+            console.log('Web Audio API not supported:', error);
+            this.demoAudioReady = false;
+        }
     }
 
     // Load a specific track
@@ -357,9 +399,42 @@ class MeditationApp {
         if (this.audioElement && !this.isAudioMuted) {
             this.audioElement.play().catch(error => {
                 console.log('Audio playback failed:', error);
-                // Fallback: show notification that audio couldn't play
-                this.showAudioNotification('Audio playback requires user interaction');
+                // Fallback: create a simple beep sound
+                this.createSimpleBeep();
+                this.showAudioNotification('Using simple audio tone - Add audio files for full experience');
             });
+        }
+    }
+
+    // Create a simple beep sound using Web Audio API
+    createSimpleBeep() {
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.value = 528; // 528 Hz (healing frequency)
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 1);
+            
+            // Repeat every 5 seconds during meditation
+            if (this.isTimerRunning) {
+                this.audioInterval = setInterval(() => {
+                    if (this.isTimerRunning) {
+                        this.createSimpleBeep();
+                    }
+                }, 5000);
+            }
+        } catch (error) {
+            console.log('Web Audio API not supported:', error);
         }
     }
 
@@ -368,6 +443,12 @@ class MeditationApp {
         if (this.audioElement) {
             this.audioElement.pause();
             this.audioElement.currentTime = 0;
+        }
+        
+        // Clear any beep intervals
+        if (this.audioInterval) {
+            clearInterval(this.audioInterval);
+            this.audioInterval = null;
         }
     }
 

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Audio Test</title>
+</head>
+<body>
+    <h1>Audio Test Page</h1>
+    <button onclick="playTestAudio()">Play Test Audio</button>
+    <button onclick="playWebAudio()">Play Web Audio</button>
+    
+    <audio id="testAudio" loop>
+        <source src="audio/forest-sounds.mp3" type="audio/mpeg">
+        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
+    </audio>
+    
+    <script>
+        function playTestAudio() {
+            const audio = document.getElementById('testAudio');
+            audio.play().catch(error => {
+                console.log('Audio failed:', error);
+                alert('Audio playback failed. Try Web Audio instead.');
+            });
+        }
+        
+        function playWebAudio() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                oscillator.frequency.value = 528; // 528 Hz
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 2);
+
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 2);
+                
+                alert('Web Audio played successfully!');
+            } catch (error) {
+                alert('Web Audio failed: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>

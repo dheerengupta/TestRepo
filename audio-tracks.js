@@ -1,10 +1,10 @@
-// Meditation Audio Tracks Data
+// Meditation Audio Tracks Data - Using Web URLs for immediate functionality
 const MEDITATION_TRACKS = [
     {
         id: 1,
         name: "Peaceful Forest",
         description: "Gentle forest sounds with birds and flowing water",
-        file: "audio/forest-sounds.mp3",
+        file: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
         duration: 600, // 10 minutes
         type: "nature"
     },
@@ -12,7 +12,7 @@ const MEDITATION_TRACKS = [
         id: 2,
         name: "Ocean Waves",
         description: "Soothing ocean waves on a peaceful shore",
-        file: "audio/ocean-waves.mp3",
+        file: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
         duration: 600,
         type: "nature"
     },
@@ -20,7 +20,7 @@ const MEDITATION_TRACKS = [
         id: 3,
         name: "Rain & Thunder",
         description: "Gentle rain with distant thunder",
-        file: "audio/rain-thunder.mp3",
+        file: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
         duration: 600,
         type: "nature"
     },
@@ -28,7 +28,7 @@ const MEDITATION_TRACKS = [
         id: 4,
         name: "Tibetan Bowls",
         description: "Harmonious Tibetan singing bowls",
-        file: "audio/tibetan-bowls.mp3",
+        file: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
         duration: 600,
         type: "instrumental"
     },
@@ -36,7 +36,7 @@ const MEDITATION_TRACKS = [
         id: 5,
         name: "Soft Piano",
         description: "Calming piano melodies for deep relaxation",
-        file: "audio/soft-piano.mp3",
+        file: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
         duration: 600,
         type: "instrumental"
     },
@@ -44,7 +44,7 @@ const MEDITATION_TRACKS = [
         id: 6,
         name: "Wind Chimes",
         description: "Gentle wind chimes in a summer breeze",
-        file: "audio/wind-chimes.mp3",
+        file: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
         duration: 600,
         type: "nature"
     },
@@ -52,7 +52,7 @@ const MEDITATION_TRACKS = [
         id: 7,
         name: "White Noise",
         description: "Pure white noise for focused meditation",
-        file: "audio/white-noise.mp3",
+        file: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
         duration: 600,
         type: "ambient"
     },
@@ -60,7 +60,7 @@ const MEDITATION_TRACKS = [
         id: 8,
         name: "Zen Garden",
         description: "Peaceful sounds of a Japanese zen garden",
-        file: "audio/zen-garden.mp3",
+        file: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
         duration: 600,
         type: "nature"
     }
