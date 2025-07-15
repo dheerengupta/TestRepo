@@ -71,6 +71,23 @@
                         <div class="timer-progress">
                             <div class="progress-bar" id="progressBar"></div>
                         </div>
+                        
+                        <!-- Audio Controls -->
+                        <div class="audio-controls">
+                            <div class="audio-info">
+                                <span class="audio-icon">🎵</span>
+                                <span class="audio-track-name" id="audioTrackName">Peaceful Forest</span>
+                            </div>
+                            <div class="audio-buttons">
+                                <button class="audio-btn" id="muteBtn" title="Mute/Unmute">🔊</button>
+                                <button class="audio-btn" id="prevTrackBtn" title="Previous Track">⏮️</button>
+                                <button class="audio-btn" id="nextTrackBtn" title="Next Track">⏭️</button>
+                            </div>
+                            <div class="volume-control">
+                                <span class="volume-icon">🔉</span>
+                                <input type="range" id="volumeSlider" min="0" max="100" value="50" class="volume-slider">
+                            </div>
+                        </div>
                     </div>
 
                                         <!-- Progress Section -->
@@ -202,6 +219,15 @@
             </div>
         </section>
 
+        <!-- Audio Elements for Meditation Music -->
+        <div class="audio-elements">
+            <audio id="meditationAudio" loop preload="auto">
+                <source src="audio/forest-sounds.mp3" type="audio/mpeg">
+                <source src="audio/forest-sounds.ogg" type="audio/ogg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
         <!-- Footer -->
         <footer class="footer">
             <p>&copy; 2024 Daily Meditation. Peace begins with a single breath.</p>
@@ -209,6 +235,7 @@
     </div>
 
     <script src="meditation-data.js"></script>
+    <script src="audio-tracks.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

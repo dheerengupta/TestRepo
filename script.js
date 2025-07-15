@@ -8,6 +8,12 @@ class MeditationApp {
         this.timeRemaining = 0;
         this.isTimerRunning = false;
         
+        // Audio properties
+        this.audioElement = null;
+        this.currentTrack = null;
+        this.isAudioMuted = false;
+        this.audioVolume = 0.5;
+        
         // Initialize the app
         this.init();
     }
@@ -18,6 +24,7 @@ class MeditationApp {
         this.updateProgressStats();
         this.createCalendar();
         this.setupEventListeners();
+        this.initializeAudio();
     }
 
     // Load and display today's meditation
@@ -51,6 +58,12 @@ class MeditationApp {
     setupEventListeners() {
         document.getElementById('startBtn').addEventListener('click', () => this.startMeditation());
         document.getElementById('completeBtn').addEventListener('click', () => this.completeMeditation());
+        
+        // Audio event listeners
+        document.getElementById('muteBtn').addEventListener('click', () => this.toggleMute());
+        document.getElementById('nextTrackBtn').addEventListener('click', () => this.nextTrack());
+        document.getElementById('prevTrackBtn').addEventListener('click', () => this.previousTrack());
+        document.getElementById('volumeSlider').addEventListener('input', (e) => this.setVolume(e.target.value));
     }
 
     // Start meditation timer
@@ -61,6 +74,9 @@ class MeditationApp {
         document.getElementById('startBtn').style.display = 'none';
         document.getElementById('completeBtn').style.display = 'inline-flex';
         document.getElementById('timerDisplay').style.display = 'block';
+        
+        // Start audio playback
+        this.playAudio();
         
         this.timer = setInterval(() => {
             this.timeRemaining--;
@@ -84,6 +100,9 @@ class MeditationApp {
         document.getElementById('startBtn').style.display = 'inline-flex';
         document.getElementById('completeBtn').style.display = 'none';
         document.getElementById('timerDisplay').style.display = 'none';
+        
+        // Stop audio playback
+        this.stopAudio();
         
         // Reset timer
         this.timeRemaining = this.timerDuration;
@@ -299,6 +318,123 @@ class MeditationApp {
             
             calendarGrid.appendChild(dayElement);
         }
+    }
+
+    // Initialize audio system
+    initializeAudio() {
+        this.audioElement = document.getElementById('meditationAudio');
+        this.currentTrack = getRandomTrack(); // Get random track for variety
+        this.loadTrack(this.currentTrack);
+        this.setupAudioVolume();
+        this.updateAudioDisplay();
+    }
+
+    // Load a specific track
+    loadTrack(track) {
+        if (!track) return;
+        
+        this.currentTrack = track;
+        this.audioElement.src = track.file;
+        this.updateAudioDisplay();
+    }
+
+    // Setup audio volume
+    setupAudioVolume() {
+        this.audioElement.volume = this.audioVolume;
+        document.getElementById('volumeSlider').value = this.audioVolume * 100;
+    }
+
+    // Update audio display
+    updateAudioDisplay() {
+        const trackNameElement = document.getElementById('audioTrackName');
+        if (this.currentTrack) {
+            trackNameElement.textContent = this.currentTrack.name;
+        }
+    }
+
+    // Play audio
+    playAudio() {
+        if (this.audioElement && !this.isAudioMuted) {
+            this.audioElement.play().catch(error => {
+                console.log('Audio playback failed:', error);
+                // Fallback: show notification that audio couldn't play
+                this.showAudioNotification('Audio playback requires user interaction');
+            });
+        }
+    }
+
+    // Stop audio
+    stopAudio() {
+        if (this.audioElement) {
+            this.audioElement.pause();
+            this.audioElement.currentTime = 0;
+        }
+    }
+
+    // Toggle mute
+    toggleMute() {
+        this.isAudioMuted = !this.isAudioMuted;
+        const muteBtn = document.getElementById('muteBtn');
+        
+        if (this.isAudioMuted) {
+            this.audioElement.volume = 0;
+            muteBtn.textContent = '🔇';
+            muteBtn.title = 'Unmute';
+        } else {
+            this.audioElement.volume = this.audioVolume;
+            muteBtn.textContent = '🔊';
+            muteBtn.title = 'Mute';
+        }
+    }
+
+    // Set volume
+    setVolume(value) {
+        this.audioVolume = value / 100;
+        if (!this.isAudioMuted) {
+            this.audioElement.volume = this.audioVolume;
+        }
+    }
+
+    // Next track
+    nextTrack() {
+        if (this.currentTrack) {
+            const nextTrack = getNextTrack(this.currentTrack.id);
+            this.loadTrack(nextTrack);
+            
+            // If currently playing, restart with new track
+            if (this.isTimerRunning) {
+                this.stopAudio();
+                this.playAudio();
+            }
+        }
+    }
+
+    // Previous track
+    previousTrack() {
+        if (this.currentTrack) {
+            const prevTrack = getPreviousTrack(this.currentTrack.id);
+            this.loadTrack(prevTrack);
+            
+            // If currently playing, restart with new track
+            if (this.isTimerRunning) {
+                this.stopAudio();
+                this.playAudio();
+            }
+        }
+    }
+
+    // Show audio notification
+    showAudioNotification(message) {
+        const trackNameElement = document.getElementById('audioTrackName');
+        const originalText = trackNameElement.textContent;
+        
+        trackNameElement.textContent = message;
+        trackNameElement.style.color = 'rgba(255, 255, 255, 0.6)';
+        
+        setTimeout(() => {
+            trackNameElement.textContent = originalText;
+            trackNameElement.style.color = 'rgba(255, 255, 255, 0.9)';
+        }, 3000);
     }
 }
 
