@@ -95,23 +95,14 @@ body {
 /* Content Wrapper for Layout */
 .content-wrapper {
     display: flex;
+    flex-direction: column;
     gap: 30px;
-    align-items: flex-start;
 }
 
 .left-content {
-    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 30px;
-}
-
-.sidebar {
-    width: 300px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
 }
 
 /* Ad Spaces */
@@ -146,15 +137,51 @@ body {
 }
 
 .ad-content {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1rem;
-    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 0.9rem;
+    font-weight: 500;
     text-align: center;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     background: rgba(0, 0, 0, 0.1);
-    padding: 10px 20px;
-    border-radius: 4px;
+    padding: 15px;
+    border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 100%;
+    justify-content: center;
+}
+
+.ad-brand {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.ad-text {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.ad-cta {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.ad-cta:hover {
+    background: linear-gradient(135deg, #5a6fd8, #6a4190);
+    transform: translateY(-1px);
 }
 
 /* Banner Ad (728x90) */
@@ -190,6 +217,65 @@ body {
     width: 320px;
     height: 50px;
     max-width: 100%;
+}
+
+/* Ads Section at Bottom */
+.ads-section {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 40px 20px;
+    margin: 40px 0 20px 0;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ads-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.ads-title {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.ads-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.ads-row:last-child {
+    margin-bottom: 0;
+}
+
+/* Banner Ad Adjustments */
+.ad-banner.ad-bottom {
+    margin: 30px 0;
+}
+
+.ad-banner.ad-bottom .ad-content {
+    padding: 20px;
+}
+
+.ad-banner.ad-bottom .ad-brand {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
+.ad-banner.ad-bottom .ad-text {
+    font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+.ad-banner.ad-bottom .ad-cta {
+    font-size: 1rem;
+    padding: 8px 24px;
 }
 
 /* Meditation Card */
@@ -450,19 +536,10 @@ body {
         font-size: 2rem;
     }
     
-    /* Mobile Layout - Stack Content */
+    /* Mobile Layout - Single Column */
     .content-wrapper {
         flex-direction: column;
         gap: 20px;
-    }
-    
-    .sidebar {
-        width: 100%;
-        order: 2;
-    }
-    
-    .left-content {
-        order: 1;
     }
     
     .meditation-card {
@@ -497,22 +574,31 @@ body {
     }
     
     /* Mobile Ad Adjustments */
+    .ads-section {
+        padding: 30px 15px;
+        margin: 30px 0 15px 0;
+    }
+    
+    .ads-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    
     .ad-banner .ad-placeholder {
-        width: 320px;
-        height: 50px;
+        width: 100%;
+        max-width: 500px;
+        height: 120px;
     }
     
     .ad-rectangle .ad-placeholder {
-        width: 300px;
-        height: 250px;
-    }
-    
-    .ad-skyscraper {
-        display: none; /* Hide skyscraper ads on mobile */
+        width: 100%;
+        max-width: 350px;
+        height: 200px;
     }
     
     .ad-space {
-        margin: 15px 0;
+        margin: 10px 0;
     }
 }
 
@@ -534,19 +620,27 @@ body {
     }
     
     /* Very Small Screen Ad Adjustments */
+    .ads-section {
+        padding: 20px 10px;
+        margin: 20px 0 10px 0;
+    }
+    
+    .ads-title {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+    
     .ad-banner .ad-placeholder {
         width: 100%;
-        max-width: 320px;
-        height: 50px;
+        height: 100px;
     }
     
     .ad-rectangle .ad-placeholder {
         width: 100%;
-        max-width: 300px;
-        height: 250px;
+        height: 180px;
     }
     
     .ad-space {
-        margin: 10px 0;
+        margin: 8px 0;
     }
 }
