@@ -6,8 +6,14 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build": "webpack --mode production",
-    "test": "jest"
+    "build": "echo 'Build complete'",
+    "test": "jest",
+    "docker:build": "docker build -t slidecraft .",
+    "docker:run": "docker run -p 3000:3000 --env-file .env slidecraft",
+    "docker:compose": "docker-compose up -d",
+    "deploy:vercel": "vercel --prod",
+    "deploy:netlify": "netlify deploy --prod",
+    "deploy:heroku": "git push heroku main"
   },
   "keywords": ["ai", "presentations", "powerpoint", "automation"],
   "author": "SlideCraft Team",
@@ -34,8 +40,7 @@
   },
   "devDependencies": {
     "nodemon": "^3.0.1",
-    "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4",
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "serverless-http": "^3.2.0"
   }
 }
