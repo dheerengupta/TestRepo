@@ -3,14 +3,26 @@ const natural = require('natural');
 
 class AIService {
   constructor() {
-    this.openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY
-    });
+    this.hasApiKey = !!process.env.OPENAI_API_KEY;
+    
+    if (this.hasApiKey) {
+      this.openai = new OpenAI({
+        apiKey: process.env.OPENAI_API_KEY
+      });
+    } else {
+      console.warn('⚠️  OpenAI API key not found. AI features will return demo content.');
+      this.openai = null;
+    }
     this.tokenizer = natural.WordTokenizer;
   }
 
   async generateContentFromTopic(topic, slideCount = 10) {
     try {
+      // Return demo content if no API key
+      if (!this.hasApiKey) {
+        return this.getDemoContent(topic, slideCount);
+      }
+      
       const prompt = `Create a comprehensive presentation outline for the topic: "${topic}".
       
       Requirements:
@@ -70,6 +82,11 @@ class AIService {
 
   async processDocumentContent(extractedText) {
     try {
+      // Return demo content if no API key
+      if (!this.hasApiKey) {
+        return this.getDemoContent("Document Content Analysis", 5);
+      }
+      
       const prompt = `Analyze and summarize the following document content for a presentation:
 
       "${extractedText}"
@@ -110,6 +127,10 @@ class AIService {
 
   async processWebContent(webContent) {
     try {
+      // Return demo content if no API key
+      if (!this.hasApiKey) {
+        return this.getDemoContent("Web Content Analysis", 5);
+      }
       const prompt = `Create a presentation from the following web content:
 
       Title: ${webContent.title}
@@ -193,6 +214,10 @@ class AIService {
 
   async generateVisualSuggestions(slideContent) {
     try {
+      // Return demo content if no API key
+      if (!this.hasApiKey) {
+        return this.getDemoVisualSuggestions();
+      }
       const prompt = `Based on this slide content, suggest specific visual elements:
 
       "${JSON.stringify(slideContent)}"
@@ -313,6 +338,100 @@ class AIService {
       .sort(([,a], [,b]) => b - a)
       .slice(0, 10)
       .map(([word]) => word);
+  }
+
+  // Demo content for when API key is not available
+  getDemoContent(topic, slideCount = 10) {
+    const demoSlides = [
+      {
+        slideNumber: 1,
+        type: "title",
+        title: `${topic}`,
+        subtitle: "A Comprehensive Overview",
+        speakerNotes: `Welcome to this presentation on ${topic}. This is demo content generated without an API key.`
+      },
+      {
+        slideNumber: 2,
+        type: "content",
+        title: "Introduction",
+        bulletPoints: [
+          `Understanding the fundamentals of ${topic}`,
+          "Key concepts and terminology",
+          "Current state and trends",
+          "Why this topic matters today"
+        ],
+        visualSuggestion: "Infographic showing key statistics",
+        speakerNotes: `This slide introduces the basic concepts of ${topic} and sets the context for the presentation.`
+      },
+      {
+        slideNumber: 3,
+        type: "content",
+        title: "Key Benefits",
+        bulletPoints: [
+          "Improved efficiency and productivity",
+          "Cost-effective solutions",
+          "Enhanced user experience",
+          "Future-ready approach"
+        ],
+        visualSuggestion: "Chart showing benefits comparison",
+        speakerNotes: "Highlight the main advantages and positive impacts."
+      },
+      {
+        slideNumber: 4,
+        type: "content",
+        title: "Implementation Strategy",
+        bulletPoints: [
+          "Phase 1: Planning and preparation",
+          "Phase 2: Pilot testing",
+          "Phase 3: Full deployment",
+          "Phase 4: Monitoring and optimization"
+        ],
+        visualSuggestion: "Timeline or process flow diagram",
+        speakerNotes: "Break down the implementation into manageable phases."
+      },
+      {
+        slideNumber: 5,
+        type: "content",
+        title: "Conclusion",
+        bulletPoints: [
+          `${topic} offers significant opportunities`,
+          "Implementation requires careful planning",
+          "Success depends on stakeholder engagement",
+          "The future looks promising"
+        ],
+        visualSuggestion: "Summary infographic",
+        speakerNotes: "Wrap up the key points and provide a call to action."
+      }
+    ];
+
+    return {
+      title: `${topic} - Demo Presentation`,
+      slides: demoSlides.slice(0, Math.min(slideCount, 5)),
+      metadata: {
+        isDemo: true,
+        message: "🔑 This is demo content. Add your OpenAI API key for AI-generated presentations!"
+      }
+    };
+  }
+
+  getDemoVisualSuggestions() {
+    return [
+      {
+        type: "chart",
+        description: "Bar chart showing growth trends",
+        placement: "center"
+      },
+      {
+        type: "infographic",
+        description: "Process flow diagram",
+        placement: "full-slide"
+      },
+      {
+        type: "image",
+        description: "Professional stock photo",
+        placement: "right-side"
+      }
+    ];
   }
 }
 

@@ -199,6 +199,14 @@ app.post('/api/generate-from-url', async (req, res) => {
   }
 });
 
+// Demo status endpoint
+app.get('/api/demo-status', (req, res) => {
+  res.json({
+    isDemoMode: !process.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY === 'your_openai_api_key_here',
+    message: 'Add your OpenAI API key to enable AI-powered content generation'
+  });
+});
+
 // Get available templates
 app.get('/api/templates', async (req, res) => {
   try {

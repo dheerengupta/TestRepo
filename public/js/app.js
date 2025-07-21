@@ -15,6 +15,7 @@ class SlideCraftApp {
         this.setupMethodTabs();
         this.setupCharacterCount();
         this.setupModals();
+        this.checkDemoMode();
     }
 
     setupEventListeners() {
@@ -241,6 +242,7 @@ class SlideCraftApp {
 
             if (result.success) {
                 this.currentPresentation = result;
+                this.handleDemoResponse(result);
                 this.showResults(result);
             } else {
                 this.showError(result.error || 'Failed to generate presentation');
@@ -283,6 +285,7 @@ class SlideCraftApp {
 
             if (result.success) {
                 this.currentPresentation = result;
+                this.handleDemoResponse(result);
                 this.showResults(result);
             } else {
                 this.showError(result.error || 'Failed to process document');
@@ -332,6 +335,7 @@ class SlideCraftApp {
 
             if (result.success) {
                 this.currentPresentation = result;
+                this.handleDemoResponse(result);
                 this.showResults(result);
             } else {
                 this.showError(result.error || 'Failed to process URL');
@@ -752,6 +756,61 @@ class SlideCraftApp {
 
     capitalizeFirst(str) {
         return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    // Demo mode methods
+    async checkDemoMode() {
+        try {
+            const response = await fetch('/api/demo-status');
+            const data = await response.json();
+            if (data.isDemoMode) {
+                this.showDemoBanner();
+            }
+        } catch (error) {
+            console.log('Could not check demo status');
+        }
+    }
+
+    showDemoBanner() {
+        const banner = document.getElementById('demo-banner');
+        if (banner) {
+            banner.style.display = 'block';
+        }
+    }
+
+    hideDemoBanner() {
+        const banner = document.getElementById('demo-banner');
+        if (banner) {
+            banner.style.display = 'none';
+        }
+    }
+
+    handleDemoResponse(data) {
+        if (data.metadata && data.metadata.isDemo) {
+            this.showDemoBanner();
+            // Show demo message in results
+            const demoMessage = document.createElement('div');
+            demoMessage.className = 'demo-message';
+            demoMessage.innerHTML = `
+                <div class="demo-message-content">
+                    <i class="fas fa-info-circle"></i>
+                    <span>${data.metadata.message}</span>
+                </div>
+            `;
+            
+            const resultsSection = document.querySelector('.results-section');
+            if (resultsSection) {
+                resultsSection.insertBefore(demoMessage, resultsSection.firstChild);
+            }
+        }
+    }
+}
+
+// Global function for demo banner close button
+function hideDemoBanner() {
+    const banner = document.getElementById('demo-banner');
+    if (banner) {
+        banner.style.display = 'none';
     }
 }
 
