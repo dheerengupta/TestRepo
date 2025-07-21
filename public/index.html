@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SlideCraft - AI-Powered Presentation Generator</title>
+    <meta name="description" content="Create professional PowerPoint presentations instantly with AI. Upload documents, enter topics, or share URLs to generate stunning slides automatically.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-magic"></i>
+                    <span>SlideCraft</span>
+                </div>
+                <nav class="nav">
+                    <a href="#features" class="nav-link">Features</a>
+                    <a href="#templates" class="nav-link">Templates</a>
+                    <a href="#history" class="nav-link">History</a>
+                    <a href="#help" class="nav-link">Help</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="btn btn-outline" id="loginBtn">
+                        <i class="fas fa-user"></i>
+                        Sign In
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        Create Professional Presentations
+                        <span class="gradient-text">Instantly with AI</span>
+                    </h1>
+                    <p class="hero-description">
+                        Transform your ideas into stunning PowerPoint presentations in seconds. 
+                        Just provide a topic, upload a document, or share a URL - our AI does the rest.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number">10K+</div>
+                            <div class="stat-label">Presentations Created</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">95%</div>
+                            <div class="stat-label">Time Saved</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">4.9★</div>
+                            <div class="stat-label">User Rating</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Input Methods -->
+        <section class="input-section">
+            <div class="container">
+                <h2 class="section-title">How would you like to create your presentation?</h2>
+                
+                <div class="input-methods">
+                    <!-- Topic Input -->
+                    <div class="input-method active" data-method="topic">
+                        <div class="method-header">
+                            <div class="method-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="method-info">
+                                <h3>From Topic</h3>
+                                <p>Enter any topic and let AI research and create your presentation</p>
+                            </div>
+                        </div>
+                        <div class="method-form">
+                            <div class="form-group">
+                                <label for="topicInput">What's your presentation topic?</label>
+                                <input type="text" id="topicInput" placeholder="e.g., AI in Healthcare, Climate Change Solutions, Digital Marketing Trends..." maxlength="200">
+                                <div class="input-help">
+                                    <span class="char-count">0/200</span>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="slideCount">Number of slides</label>
+                                    <select id="slideCount">
+                                        <option value="8">8 slides</option>
+                                        <option value="10" selected>10 slides</option>
+                                        <option value="12">12 slides</option>
+                                        <option value="15">15 slides</option>
+                                        <option value="20">20 slides</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="topicTemplate">Template</label>
+                                    <select id="topicTemplate">
+                                        <option value="professional">Professional</option>
+                                        <option value="corporate">Corporate</option>
+                                        <option value="creative">Creative</option>
+                                        <option value="academic">Academic</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-large" id="generateFromTopic">
+                                <i class="fas fa-magic"></i>
+                                Generate Presentation
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Document Upload -->
+                    <div class="input-method" data-method="document">
+                        <div class="method-header">
+                            <div class="method-icon">
+                                <i class="fas fa-file-upload"></i>
+                            </div>
+                            <div class="method-info">
+                                <h3>From Document</h3>
+                                <p>Upload your PDF, Word, or text file to create a presentation</p>
+                            </div>
+                        </div>
+                        <div class="method-form">
+                            <div class="upload-area" id="uploadArea">
+                                <div class="upload-content">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <h4>Drop your file here</h4>
+                                    <p>or <span class="upload-link">browse to upload</span></p>
+                                    <small>Supports PDF, DOC, DOCX, TXT (max 10MB)</small>
+                                </div>
+                                <input type="file" id="documentInput" accept=".pdf,.doc,.docx,.txt" hidden>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="docTemplate">Template</label>
+                                    <select id="docTemplate">
+                                        <option value="professional">Professional</option>
+                                        <option value="corporate">Corporate</option>
+                                        <option value="creative">Creative</option>
+                                        <option value="academic">Academic</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-large" id="generateFromDocument" disabled>
+                                <i class="fas fa-file-powerpoint"></i>
+                                Create from Document
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- URL Input -->
+                    <div class="input-method" data-method="url">
+                        <div class="method-header">
+                            <div class="method-icon">
+                                <i class="fas fa-link"></i>
+                            </div>
+                            <div class="method-info">
+                                <h3>From URL</h3>
+                                <p>Share a web page URL and we'll extract the key content</p>
+                            </div>
+                        </div>
+                        <div class="method-form">
+                            <div class="form-group">
+                                <label for="urlInput">Website URL</label>
+                                <input type="url" id="urlInput" placeholder="https://example.com/article">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="urlTemplate">Template</label>
+                                    <select id="urlTemplate">
+                                        <option value="professional">Professional</option>
+                                        <option value="corporate">Corporate</option>
+                                        <option value="creative">Creative</option>
+                                        <option value="academic">Academic</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-large" id="generateFromUrl">
+                                <i class="fas fa-globe"></i>
+                                Generate from URL
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Method Selector -->
+                <div class="method-selector">
+                    <button class="method-tab active" data-method="topic">
+                        <i class="fas fa-lightbulb"></i>
+                        Topic
+                    </button>
+                    <button class="method-tab" data-method="document">
+                        <i class="fas fa-file-upload"></i>
+                        Document
+                    </button>
+                    <button class="method-tab" data-method="url">
+                        <i class="fas fa-link"></i>
+                        URL
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading Section -->
+        <section class="loading-section" id="loadingSection" style="display: none;">
+            <div class="container">
+                <div class="loading-content">
+                    <div class="loading-animation">
+                        <div class="loading-circle"></div>
+                        <div class="loading-circle"></div>
+                        <div class="loading-circle"></div>
+                    </div>
+                    <h3 id="loadingTitle">Creating your presentation...</h3>
+                    <p id="loadingDescription">Our AI is analyzing your content and designing professional slides</p>
+                    <div class="loading-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <span class="progress-text" id="progressText">0%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section" id="resultsSection" style="display: none;">
+            <div class="container">
+                <div class="results-header">
+                    <h2>Your Presentation is Ready!</h2>
+                    <p>Review your slides and make any adjustments before downloading</p>
+                </div>
+
+                <div class="results-content">
+                    <div class="slides-preview" id="slidesPreview">
+                        <!-- Slides will be dynamically inserted here -->
+                    </div>
+
+                    <div class="results-sidebar">
+                        <div class="presentation-info">
+                            <h3 id="presentationTitle">Presentation Title</h3>
+                            <div class="presentation-meta">
+                                <span><i class="fas fa-layer-group"></i> <span id="slideCountDisplay">10</span> slides</span>
+                                <span><i class="fas fa-clock"></i> <span id="estimatedTime">8 min</span> estimated</span>
+                                <span><i class="fas fa-palette"></i> <span id="templateDisplay">Professional</span> template</span>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-primary btn-large" id="downloadPptx">
+                                <i class="fas fa-download"></i>
+                                Download PowerPoint
+                            </button>
+                            
+                            <div class="secondary-actions">
+                                <button class="btn btn-outline" id="editPresentation">
+                                    <i class="fas fa-edit"></i>
+                                    Edit Slides
+                                </button>
+                                <button class="btn btn-outline" id="saveToCloud">
+                                    <i class="fas fa-cloud"></i>
+                                    Save to Cloud
+                                </button>
+                                <button class="btn btn-outline" id="sharePresentation">
+                                    <i class="fas fa-share"></i>
+                                    Share
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="customization-panel" id="customizationPanel" style="display: none;">
+                            <h4>Customize Presentation</h4>
+                            <div class="customization-options">
+                                <div class="form-group">
+                                    <label>Template</label>
+                                    <select id="templateCustomizer">
+                                        <option value="professional">Professional</option>
+                                        <option value="corporate">Corporate</option>
+                                        <option value="creative">Creative</option>
+                                        <option value="academic">Academic</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Primary Color</label>
+                                    <input type="color" id="primaryColor" value="#2E4B8A">
+                                </div>
+                                <div class="form-group">
+                                    <label>Font Family</label>
+                                    <select id="fontFamily">
+                                        <option value="Calibri">Calibri</option>
+                                        <option value="Arial">Arial</option>
+                                        <option value="Times New Roman">Times New Roman</option>
+                                        <option value="Montserrat">Montserrat</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary" id="applyCustomizations">
+                                    Apply Changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Templates Section -->
+        <section class="templates-section" id="templates">
+            <div class="container">
+                <h2 class="section-title">Professional Templates</h2>
+                <p class="section-description">Choose from our collection of professionally designed templates</p>
+                
+                <div class="templates-grid" id="templatesGrid">
+                    <!-- Templates will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section" id="features">
+            <div class="container">
+                <h2 class="section-title">Why Choose SlideCraft?</h2>
+                
+                <div class="features-grid">
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>AI-Powered Content</h3>
+                        <p>Advanced AI analyzes your input and creates compelling, well-structured presentations with relevant content and visuals.</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Lightning Fast</h3>
+                        <p>Generate professional presentations in seconds, not hours. Save time and focus on what matters most.</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3>Beautiful Design</h3>
+                        <p>Choose from professionally designed templates with perfect color schemes, typography, and layouts.</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <h3>Cloud Integration</h3>
+                        <p>Save directly to Google Drive, OneDrive, or export to Google Slides. Access your presentations anywhere.</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <h3>Easy Editing</h3>
+                        <p>Fine-tune your presentation with our intuitive editor. Reorder slides, edit content, and customize designs.</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Mobile Friendly</h3>
+                        <p>Create and edit presentations on any device. Our responsive design works perfectly on desktop, tablet, and mobile.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- History Section -->
+        <section class="history-section" id="history" style="display: none;">
+            <div class="container">
+                <h2 class="section-title">Your Presentations</h2>
+                
+                <div class="history-content">
+                    <div class="history-filters">
+                        <input type="search" placeholder="Search presentations..." id="historySearch">
+                        <select id="historySort">
+                            <option value="date-desc">Newest First</option>
+                            <option value="date-asc">Oldest First</option>
+                            <option value="name-asc">Name A-Z</option>
+                            <option value="name-desc">Name Z-A</option>
+                        </select>
+                    </div>
+                    
+                    <div class="presentations-grid" id="presentationsGrid">
+                        <!-- Presentation history will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals -->
+    <!-- Cloud Save Modal -->
+    <div class="modal" id="cloudSaveModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Save to Cloud</h3>
+                <button class="modal-close" data-modal="cloudSaveModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Choose where to save your presentation:</p>
+                <div class="cloud-options">
+                    <button class="cloud-option" data-service="google">
+                        <i class="fab fa-google-drive"></i>
+                        <span>Google Drive</span>
+                    </button>
+                    <button class="cloud-option" data-service="microsoft">
+                        <i class="fab fa-microsoft"></i>
+                        <span>OneDrive</span>
+                    </button>
+                    <button class="cloud-option" data-service="googleslides">
+                        <i class="fab fa-google"></i>
+                        <span>Google Slides</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div class="modal" id="errorModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Error</h3>
+                <button class="modal-close" data-modal="errorModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="error-content">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p id="errorMessage">An error occurred. Please try again.</p>
+                </div>
+                <button class="btn btn-primary" data-modal="errorModal">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-magic"></i>
+                        <span>SlideCraft</span>
+                    </div>
+                    <p>Create professional presentations instantly with the power of AI.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#templates">Templates</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#api">API</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#help">Help Center</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#tutorials">Tutorials</a></li>
+                        <li><a href="#status">Status</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#security">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 SlideCraft. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/app.js"></script>
+</body>
+</html>

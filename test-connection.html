@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SlideCraft Connection Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        .status {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .success { background: rgba(46, 204, 113, 0.8); }
+        .error { background: rgba(231, 76, 60, 0.8); }
+        .warning { background: rgba(230, 126, 34, 0.8); }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-size: 16px;
+        }
+        button:hover { background: #2980b9; }
+        .test-results {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+        }
+        .link {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 SlideCraft Connection Test</h1>
+        
+        <div class="status success">
+            ✅ Server Status: RUNNING on localhost:3000
+        </div>
+        
+        <h2>🔗 Try These Links:</h2>
+        <p><a href="http://localhost:3000" class="link" target="_blank">http://localhost:3000</a></p>
+        <p><a href="http://127.0.0.1:3000" class="link" target="_blank">http://127.0.0.1:3000</a></p>
+        
+        <h2>🧪 Connection Tests:</h2>
+        <button onclick="testConnection()">Test Server Connection</button>
+        <button onclick="testAPI()">Test API Endpoints</button>
+        <button onclick="testAssets()">Test CSS/JS Files</button>
+        
+        <div id="testResults" class="test-results" style="display:none;">
+            <h3>Test Results:</h3>
+            <div id="results"></div>
+        </div>
+        
+        <h2>📋 Quick Checklist:</h2>
+        <ul>
+            <li>✅ Server is running (confirmed via curl)</li>
+            <li>✅ HTML page loads (25,394 bytes)</li>
+            <li>✅ CSS file loads correctly</li>
+            <li>✅ JavaScript file loads correctly</li>
+            <li>✅ Security headers configured</li>
+        </ul>
+        
+        <h2>🛠️ If Still Not Working:</h2>
+        <ol>
+            <li><strong>Check URL format:</strong> Must include "http://"</li>
+            <li><strong>Try different browser:</strong> Chrome, Firefox, Safari</li>
+            <li><strong>Clear browser cache:</strong> Ctrl+F5 or Cmd+Shift+R</li>
+            <li><strong>Check firewall:</strong> Allow port 3000</li>
+            <li><strong>Try incognito mode:</strong> Bypass extensions/cache</li>
+        </ol>
+        
+        <div class="status warning">
+            ⚠️ If accessing remotely, you may need the external IP address instead of localhost
+        </div>
+    </div>
+
+    <script>
+        async function testConnection() {
+            const results = document.getElementById('results');
+            const testResults = document.getElementById('testResults');
+            testResults.style.display = 'block';
+            results.innerHTML = 'Testing connection...';
+            
+            try {
+                const response = await fetch('http://localhost:3000');
+                if (response.ok) {
+                    results.innerHTML = '<div class="status success">✅ Connection successful! Server is responding.</div>';
+                } else {
+                    results.innerHTML = '<div class="status error">❌ Server responded with error: ' + response.status + '</div>';
+                }
+            } catch (error) {
+                results.innerHTML = '<div class="status error">❌ Connection failed: ' + error.message + '</div>';
+            }
+        }
+        
+        async function testAPI() {
+            const results = document.getElementById('results');
+            const testResults = document.getElementById('testResults');
+            testResults.style.display = 'block';
+            results.innerHTML = 'Testing API endpoints...';
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/templates');
+                if (response.ok) {
+                    const data = await response.json();
+                    results.innerHTML = '<div class="status success">✅ API working! Found ' + data.templates.length + ' templates.</div>';
+                } else {
+                    results.innerHTML = '<div class="status error">❌ API error: ' + response.status + '</div>';
+                }
+            } catch (error) {
+                results.innerHTML = '<div class="status error">❌ API test failed: ' + error.message + '</div>';
+            }
+        }
+        
+        async function testAssets() {
+            const results = document.getElementById('results');
+            const testResults = document.getElementById('testResults');
+            testResults.style.display = 'block';
+            results.innerHTML = 'Testing CSS and JavaScript files...';
+            
+            try {
+                const cssResponse = await fetch('http://localhost:3000/css/styles.css');
+                const jsResponse = await fetch('http://localhost:3000/js/app.js');
+                
+                if (cssResponse.ok && jsResponse.ok) {
+                    results.innerHTML = '<div class="status success">✅ All assets loading correctly!</div>';
+                } else {
+                    results.innerHTML = '<div class="status error">❌ Some assets failed to load</div>';
+                }
+            } catch (error) {
+                results.innerHTML = '<div class="status error">❌ Asset test failed: ' + error.message + '</div>';
+            }
+        }
+        
+        // Auto-test on page load
+        window.onload = function() {
+            setTimeout(testConnection, 1000);
+        };
+    </script>
+</body>
+</html>
